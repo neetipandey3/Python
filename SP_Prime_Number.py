@@ -1,4 +1,6 @@
 
+#http://www.spoj.com/problems/PRIME1/
+
 print("Input: ")
 no_of_test_case = int(input())
 
