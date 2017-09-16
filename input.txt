@@ -1,7 +1,17 @@
 DFS
-4
-4
-0000
-0000
-0000
-0000
+
+5
+6
+20020
+00020
+02000
+00020
+00200
+
+
+
+1st line = Method to implement
+2nd line = Size of nursery (matrix N X N)
+3rd line = No of lizards to place
+Next lines = Nursery representation
+2 depicts Tree position
