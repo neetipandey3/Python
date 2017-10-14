@@ -1,7 +1,5 @@
 import time
-import random
 import math
-import collections
 import copy
 
 start_time = time.time()
@@ -28,7 +26,7 @@ for i in range (board_size):
 
 neighbours_dict = {}
 start_starts_at_dict = {}
-def find_next_neighbours():
+def find_next_neighbours(state):
     for col in range(board_size):
         for row in range(board_size-1, -1, -1):
             selected_fruit = state[row][col]
@@ -63,11 +61,10 @@ def find_cluster(row, col):
                 #print("cluster {}".format(cluster))
     return cluster
 
-row_cut_off_dict = {}
 def get_next_state(cur_board, row, col):
+    row_cut_off_dict = {}
     """ get the next board state by finding and then sliding the cluster """
     selected_cluster = find_cluster(row, col)
-    count_stars = 0
     for (r, c) in selected_cluster:
         cur_board[r][c] = '*'
         if(row_cut_off_dict.get(c)):
@@ -121,7 +118,7 @@ def alpha_beta_minmax(next_state, depth, alpha=float("-inf"), beta=float("inf"),
     2. best move """
         #if time_left() < TIMER_THRESHOLD:
         #    raise Timeout()
-    find_next_neighbours()
+    find_next_neighbours(next_state)
     next_moves = find_next_moves()
     if (not next_moves) or (depth == 0):
         if MAX:
@@ -171,14 +168,9 @@ def get_score(MAX):
         score -= score_MIN.pop()**2
     return score
 
-#find_next_neighbours(input_matrix)
-#print("Result {}".format(find_cluster(1, 4)))
-#get_next_state(1, 1)
-#print("Next Moves {}".format(find_next_moves()))
 score, (row, col) = alpha_beta_minmax(state, depth = 10, alpha=float("-inf"), beta=float("inf"), MAX=True)
 print("Output {}  Row {} Col {}".format(score, row, col))
 
 print("input {}".format(board))
-state = copy.deepcopy(board)
-find_next_neighbours()
+find_next_neighbours(board)
 print("Next_State {}".format(get_next_state(board, row, col)))
