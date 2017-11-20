@@ -1,6 +1,5 @@
 import copy
 
-
 def main():
     global current_query
     text_file = open("input.txt", "r")
@@ -23,19 +22,16 @@ def main():
         output_file.write(i+"\n")
 
 
-
 FAILURE = "failure"
 dict_clauses= {}
 resolved = []
 def FOL_resolution(query, KB):
-
     matching_clause = []
     query_to_resolve = []
     if not query:
         return False
 
     sub_queries = query.split("|")
-
     for sub_query in sub_queries:
         matching_clause = find_matching_predicate(sub_query, KB)
         if matching_clause:
@@ -47,7 +43,6 @@ def FOL_resolution(query, KB):
         return False
 
     list_of_matched_clauses = []
-
     resolvent, theta = FOL_resolve(query_to_resolve, matching_clause)
     list_of_matched_clauses.append(matching_clause[1])
     if negation_of(query_to_resolve[0]) not in dict_clauses.keys():
@@ -86,11 +81,9 @@ def FOL_resolve(query, matching_clause):
 
     if not query[1] and not matching_clause[1]:
         return '', []
-
     unify(negation_of(query[0]), matching_clause[0], theta)
     if FAILURE in theta:
         return '', theta
-
     if query[1]:
         clause_1 = query[1].split("|")
         clause_1.remove(query[0])
@@ -110,9 +103,7 @@ def FOL_resolve(query, matching_clause):
 
 def find_matching_predicate(query, KB):
     matched_clause = []
-
     to_search = negation_of(query)
-
     for sentence in KB:
         literals = sentence.split("|")
         for literal in literals:
@@ -283,5 +274,6 @@ def standardize(clause, i):
         l.append(get_predicate(literal) + "("+",".join(arg)+")")
     std_clause = "|".join(l)
     return std_clause
+
 
 main()
