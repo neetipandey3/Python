@@ -2,6 +2,15 @@
 
 #import numpy
 
+'''
+ Usage:
+ 
+ Input line 1: _no of test cases
+        Input line 2: n = no of items, k = maximum possible weight
+        Input line 3: weights of available items
+    
+'''
+
 from sys import setrecursionlimit
 limit = 1000000
 setrecursionlimit(limit)
